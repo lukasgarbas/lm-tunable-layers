@@ -2,7 +2,7 @@
 
 Do we really need to tune all layers in a language model? Here are a few examples where tuning just some top layers is enough to achieve the same performance as tuning the complete model.
 
-# How many layers should we tune?
+## How many layers should we tune?
 
 ### BERT base
 | Layers   | CoLA     | SST-2    | MRPC     |  RTE     | STS-B    |
@@ -35,7 +35,7 @@ corpus = GLUE_COLA()
 print(corpus)
 
 # 2. pick a language model (BERT, SpanBERT, Electra or Ernie) and select tunable layers
-# tune only top four layers ("all" for full finetuning, 0 for training just the prediction head)
+# "all" for full finetuning, 0 for training just the prediction head
 language_model = LanguageModel("bert-base-cased",
                                tunable_layers=4)
 
