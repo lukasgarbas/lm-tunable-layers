@@ -15,6 +15,14 @@ Do we really need to tune all layers in a language model? Here are a few example
 | 5        | __59.0__ | 92.1     | 85.3     | 67.4     | 89.2     |
 | 11 (full)| __59.0__ | __92.2__ | 85.6     | __68.5__ | __89.4__ |
 
+The key takeaway is that sometimes it's enough to tune just 4 or 5 top layers of a language model ✌️️
+
+- I used 'bert-base-cased' model.
+- Scores are recorded on the development set.
+- Metrics: Matthews (MCC) for CoLA, Spearman's rank for STS-B, accuracy for others.
+- Tuning only the top needs more epochs and doesn't overfit so fast with small datasets.
+- Zero means that we're only training the prediction head, eleven layers refer to the full model.
+
 ```python
 from glue_benchmark import GLUE_COLA
 from encoders import LanguageModel
@@ -46,13 +54,5 @@ trainer.train(learning_rate=5e-5, # use slightly larger lr than usual
               epochs=15,
               shuffle_data=True)
 ```
-
-- I used 'bert-base-cased' model.
-- Scores are recorded on __development sets__.
-- Metrics: Matthews (MCC) for CoLA, Spearman's rank for STS-B, accuracy for others.
-- Tuning only the top needs more epochs and doesn't overfit so fast on small datasets.
-- Zero means that we're only training the prediction head, eleven layers refer to the full model.
-
-The key takeaway is that sometimes it's enough to tune just 4 or 5 top layers of a language model ✌️️
 
 
